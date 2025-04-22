@@ -55,7 +55,7 @@ example (f g : ℝ → ℝ) (hf : even_fun f) (hg : even_fun g) : even_fun (f + 
 
 
 /-
-Tactics like `unfold`, `apply`, `exact`, `rfl` and `calc` will automatically unfold definitions.
+Tactics like `apply`, `exact`, `rfl` and `calc` will automatically unfold definitions.
 You can test this by deleting the `unfold` lines in the above example.
 
 Tactics like `rw` and `ring` will generally not unfold definitions that appear in the goal.
@@ -109,7 +109,7 @@ example (f g : ℝ → ℝ) (hf : non_decreasing f) (hg : non_decreasing g) :
   -- Let x₁ and x₂ be real numbers such that x₁ ≤ x₂
   intro x₁ x₂ h
   -- Since f is non-decreasing, f x₁ ≤ f x₂.
-  have step₁ : f x₁ ≤ f x₂ := hf x₁ x₂ h
+  have step₁ : f x₁ ≤ f x₂ := by exact hf x₁ x₂ h
   -- Since g is non-decreasing, we then get g (f x₁) ≤ g (f x₂).
   exact hg (f x₁) (f x₂) step₁
 
@@ -167,9 +167,9 @@ example (f g : ℝ → ℝ) (hf : non_decreasing f) (hg : non_increasing g) :
 
 /- # Finding lemmas
 
-Lean's mathematical library contains many useful facts,
-and remembering all of them by name is infeasible.
-The following exercises teach you two such techniques.
+Lean's mathematical library contains many useful facts, and remembering all of
+them by name is impossible.
+The following exercises teach you two techniques to avoid needing to remember names.
 * `simp` will simplify complicated expressions.
 * `apply?` will find lemmas from the library.
 -/
@@ -182,13 +182,27 @@ example (x : ℝ) (X Y : Set ℝ) (hx : x ∈ X) : x ∈ (X ∩ Y) ∪ (X \ Y) :
 }
 
 /- Use `apply?` to find the lemma that every continuous function with compact support
-has a global minimum. -/
+has a global minimum. You can click on the suggestion that appears to replace
+`apply?` with the tactic it suggested.
+-/
 
 example (f : ℝ → ℝ) (hf : Continuous f) (h2f : HasCompactSupport f) : ∃ x, ∀ y, f x ≤ f y := by {
   exact Continuous.exists_forall_le_of_hasCompactSupport hf h2f
 }
 
 /-
+Note that `apply?` does not only suggest full proofs. It can suggest lemmas that
+apply but require to check side conditions. Accepting such a suggestion
+will output incomplete proofs using the `refine` tactic.
+
+Note that each suggestion comes with a list of side conditions that would need
+to be check. So you need to decide which suggestion to accept depending on what
+the side conditions look like. For instance, if the goal is to prove continuity of
+a function, one lemma always applies: the lemma saying that any function out of
+a discrete topological space is continuous. But it leaves as a side condition
+discreteness of the source space. So you should be careful when deciding to
+accept this suggestion which can very quickly lead to a dead end.
+
 This is the end of this file where you learned how to handle universal quantifiers.
 You learned about tactics:
 * `unfold`
