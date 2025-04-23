@@ -15,6 +15,11 @@ Remember that whenever you see in a Lean file a symbol that you don't see on
 your keyboard, such as →, you can put your mouse cursor above it and learn from
 a tooltip how to type it. In the case of →, you can type it by typing "\to ", so
 backslash-t-o-space.
+
+Remember that whenever you see in a Lean file a symbol that you don't see on
+your keyboard, such as →, you can put your mouse cursor above it and learn from
+a tooltip how to type it. In the case of →, you can type it by typing "\to ", so
+backslash-t-o-space.
 -/
 
 example (a : ℝ) (ha : 0 < a) : 0 < a^2 := by

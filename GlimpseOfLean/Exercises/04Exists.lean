@@ -22,6 +22,7 @@ Furthermore, we can decompose conjunction and equivalences.
 -/
 
 example (p q r s : Prop) (h : p → r) (h' : q → s) : p ∧ q → r ∧ s := by
+example (p q r s : Prop) (h : p → r) (h' : q → s) : p ∧ q → r ∧ s := by
   intro hpq
   rcases hpq with ⟨hp, hq⟩
   constructor

@@ -172,13 +172,12 @@ example (a b c d : ℝ) (h : c = b*a - d) (h' : d = a*b) : c = 0 := by {
     c = b*a - d   := by rw [h]
     _ = b*a - a*b := by rw [h']
     _ = 0         := by ring
-}
 
 /-
 Let's do some exercises using `calc`.
 -/
 
-example (a b c : ℝ) (h : a = b + c) : exp (2 * a) = (exp b) ^ 2 * (exp c) ^ 2 := by {
+example (a b c : ℝ) (h : a = b + c) : exp (2 * a) = (exp b) ^ 2 * (exp c) ^ 2 := by
   calc
     exp (2 * a) = exp (2 * (b + c))                 := by rw[h]
               _ = exp ((b + b) + (c + c))           := by ring

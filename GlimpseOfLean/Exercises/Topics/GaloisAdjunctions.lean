@@ -92,7 +92,6 @@ lemma isSup_of_isInf {I : Set X → X} (h : isInfFun I) : isSupFun (fun s ↦ I 
   intro s
   unfold isSup
   sorry
-}
 
 /- Of course we also have the dual result constructing an infimum function from
 a supremum one. -/
@@ -516,4 +515,3 @@ lemma push_generate (f : G →* G') : push f ∘ generate = generate ∘ (Set.im
 
 end Subgroups
 end Tutorial
-
