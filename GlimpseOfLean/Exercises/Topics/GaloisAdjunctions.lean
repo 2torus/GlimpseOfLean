@@ -91,8 +91,23 @@ infimum function then it automatically admits a supremum function. -/
 lemma isSup_of_isInf {I : Set X → X} (h : isInfFun I) : isSupFun (fun s ↦ I (upperBounds s)) := by {
   intro s
   unfold isSup
+  intro x
+  constructor
+  intro hx
+  unfold isInfFun at h
+  have h:= h (upperBounds s)
+  ring
+  apply isInf.lowerBound h
+  assumption
+  ring
+  intro hi
+  unfold isInfFun at h
+  have h:= h (upperBounds s)
+  unfold upperBounds
+  intro a
+  intro ha
   sorry
-
+}
 /- Of course we also have the dual result constructing an infimum function from
 a supremum one. -/
 
